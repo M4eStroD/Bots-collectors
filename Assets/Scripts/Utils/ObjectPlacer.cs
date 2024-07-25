@@ -36,6 +36,8 @@ public abstract class ObjectPlacer : MonoBehaviour
 
 	protected void PlaceObject(Vector3 position, Base build)
 	{
+		position.y = 0;
+		
 		ObjectPlaced?.Invoke(position, build);
 	}
 

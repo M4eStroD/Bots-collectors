@@ -5146,7 +5146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4322526560730241547}
-  - component: {fileID: 4459592528341863694}
+  - component: {fileID: 4362229671035662470}
   - component: {fileID: 270066993583359233}
   - component: {fileID: 6223433914709814932}
   m_Layer: 0
@@ -5175,7 +5175,7 @@ Transform:
   - {fileID: 8840469967204359822}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4459592528341863694
+--- !u!65 &4362229671035662470
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5194,7 +5194,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 15, y: 0.2, z: 15}
+  m_Size: {x: 15, y: 1, z: 15}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &270066993583359233
 MonoBehaviour:

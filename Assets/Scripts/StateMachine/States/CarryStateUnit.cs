@@ -8,6 +8,7 @@ public class CarryStateUnit : IPayloadState<Vector3>
     private readonly UnitMover _unitMover;
 
     private Vector3 _position;
+    private bool _isChangeBase;
 
     public event Action ReachedDestination;
 
@@ -21,7 +22,7 @@ public class CarryStateUnit : IPayloadState<Vector3>
     public void Enter(Vector3 position)
     {
         _position = position;
-
+        
         _animator.SetTrigger(AnimatorData.Params.HashCarry);
     }
 

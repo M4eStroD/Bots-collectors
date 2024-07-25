@@ -1,56 +1,104 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class Base : MonoBehaviour
 {
-    [SerializeField] private ResourceGenerator _woodGenerator;
-    [SerializeField] private UnitSpawner _unitSpawner;
+	[SerializeField] private UnitSpawner _unitSpawner;
+	
+	[Inject] private BaseController _baseController;
+	[Inject] private IDataProvider _dataProvider;
+	[Inject] private Storage _storage;
+	
+	private Queue<Unit> _freeUnits = new Queue<Unit>();
 
-    private Queue<Unit> _freeUnits = new Queue<Unit>();
-    private Queue<Resource> _freeResource = new Queue<Resource>();
+	private FlagBase _newBase;
 
-    private int _score = 0;
+	public event Action<int> ResourceAdded;
+	public event Action<int> ResourceTaked;
 
-    public event Action<int> ScoreChanged;
+	private void Awake()
+	{
+		_unitSpawner.UnitAdded += AddUnit;
+	}
 
-    private void Awake()
-    {
-        _unitSpawner.UnitAdded += AddUnit;
-        _woodGenerator.ResourceAdded += AddResource;
-    }
+	private void Update()
+	{
+		ExpandBase();
+		CollectResource();
+	}
 
-    private void Update()
-    {
-        if (_freeResource.Count > 0 && _freeUnits.Count > 0)
-        {
-            Resource resource = _freeResource.Dequeue();
-            Unit unit = _freeUnits.Dequeue();
+	public void Initialize(int countUnit)
+	{
+		_unitSpawner.SpawnUnits(countUnit);
+	}
 
-            unit.SetTarget(resource);
-        }            
-    }
+	public void AddBase(FlagBase newBase)
+	{
+		_newBase = newBase;
+	}
 
-    private void AddUnit(Unit unit)
-    {
-        ReturnUnit(unit);
-        unit.ResourceConveyed += ReturnUnit;
-        unit.ResourceConveyed += IncreaseScore;
-    }
+	public void AddUnit(int countUnit = 1)
+	{
+		_unitSpawner.SpawnUnits(countUnit);
+	}
 
-    private void IncreaseScore(Unit unit)
-    {
-        _score++;
-        ScoreChanged?.Invoke(_score);
-    }
+	private void ExpandBase()
+	{
+		if (_newBase == null)
+			return;
 
-    private void ReturnUnit(Unit unit)
-    {
-        _freeUnits.Enqueue(unit);
-    }
+		var buildCost = _dataProvider.GetBase(GameItemsConstant.IDBase).Cost;
+		
+		if (_storage.Resource >= buildCost && _freeUnits.Count > 0)
+		{
+			Unit unit = _freeUnits.Dequeue();
+			unit.SetTarget(_newBase, buildCost);
+			_newBase = null;
+		}
+	}
+	
+	private void CollectResource()
+	{
+		if (_baseController.CountFreeResource > 0 && _freeUnits.Count > 0)
+		{
+			Resource resource = _baseController.GetResource();
+			Unit unit = _freeUnits.Dequeue();
 
-    private void AddResource(Resource resource)
-    {
-        _freeResource.Enqueue(resource);
-    }
+			unit.SetTarget(resource);
+		}
+	}
+
+	private void AddUnit(Unit unit)
+	{
+		ReturnUnit(unit, 0);
+		unit.ResourceConveyed += ReturnUnit;
+		unit.ResourceConveyed += IncreaseResource;
+		unit.ResourceTaked += DecreaseResource;
+		unit.Transfered += TransferUnit;
+	}
+
+	private void TransferUnit(Unit unit)
+	{
+		unit.ResourceConveyed -= ReturnUnit;
+		unit.ResourceConveyed -= IncreaseResource;
+		unit.ResourceTaked -= DecreaseResource;
+		unit.Transfered -= TransferUnit;
+	}
+
+	private void IncreaseResource(Unit unit, int count)
+	{
+		ResourceAdded?.Invoke(count);
+	}
+
+	private void DecreaseResource(int count)
+	{
+		ResourceTaked?.Invoke(count);
+	}
+
+	private void ReturnUnit(Unit unit, int count)
+	{
+		_freeUnits.Enqueue(unit);
+	}
 }

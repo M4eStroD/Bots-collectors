@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class ResourceFactory : IResourceFactory
 {
-    private const string IDResource = "wood";
-
     private readonly IDataProvider _dataProvider;
 
     private readonly ObjectPool<Resource> _objectPoolResources;
@@ -24,7 +22,8 @@ public class ResourceFactory : IResourceFactory
 
         if (tempResource == null)
         {
-            tempResource = Object.Instantiate(_dataProvider.GetResource(IDResource).prefab);
+            var resourcePrefab = _dataProvider.GetResource(GameItemsConstant.IDWood).Prefab;
+            tempResource = Object.Instantiate(resourcePrefab);
             _resources.Add(tempResource);
 
             tempResource.Taked += (() => _objectPoolResources.PutObject(tempResource));

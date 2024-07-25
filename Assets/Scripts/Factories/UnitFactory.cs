@@ -4,8 +4,6 @@ using Zenject;
 
 public class UnitFactory : IUnitFactory
 {
-    private const string IDUnit = "unit";
-
     private readonly IDataProvider _dataProvider;
     private readonly DiContainer _diContainer;
 
@@ -31,8 +29,15 @@ public class UnitFactory : IUnitFactory
 
         if (tempUnit == null)
         {
-            tempUnit = _diContainer.InstantiatePrefabForComponent<Unit>(_dataProvider.GetUnit(IDUnit).prefab);
+            var unitPrefab = _dataProvider.GetUnit(GameItemsConstant.IDUnit).Prefab;
+            tempUnit = _diContainer.InstantiatePrefabForComponent<Unit>(unitPrefab);
             _units.Add(tempUnit);
+
+            tempUnit.Transfered += ((Unit unit) => _objectPoolUnits.PutObject(unit));
+        }
+        else
+        {
+            tempUnit.gameObject.SetActive(true);
         }
 
         tempUnit.transform.position = position;

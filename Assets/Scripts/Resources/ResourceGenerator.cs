@@ -8,7 +8,7 @@ public class ResourceGenerator : MonoBehaviour
     [SerializeField] private Transform _container;
     [SerializeField] private BoxCollider _spawnPlane;
 
-    private readonly int _resourcesOnStart = 5;
+    private readonly int _resourcesOnStart = 25;
     private IResourceFactory _resourceFactory;
 
     public event Action<Resource> ResourceAdded;
@@ -19,7 +19,7 @@ public class ResourceGenerator : MonoBehaviour
         _resourceFactory = resourceFactory;
     }
     
-    private void Start()
+    public void Initialize()
     {
         SpawnResource(_resourcesOnStart);
     }
@@ -54,7 +54,7 @@ public class ResourceGenerator : MonoBehaviour
         Collider[] colliders;
 
         bool isActive;
-        float radius = 1;
+        float radius = 2;
 
         do
         {
@@ -67,7 +67,7 @@ public class ResourceGenerator : MonoBehaviour
             colliders = Physics.OverlapSphere(position, radius);
 
             foreach (Collider collider in colliders)
-                if (collider.TryGetComponent(out BaseArea _) == true)
+                if (collider.TryGetComponent(out Base _))
                     isActive = true;
         }
         while (isActive);

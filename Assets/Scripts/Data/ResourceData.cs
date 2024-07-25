@@ -7,5 +7,5 @@ public class ResourceData : ScriptableObject
     [SerializeField] private Resource _prefab;
 
     public string ID => _id;
-    public Resource prefab => _prefab;
+    public Resource Prefab => _prefab;
 }

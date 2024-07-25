@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: UnitData
   m_EditorClassIdentifier: 
   _id: unit
+  _cost: 3
   _prefab: {fileID: 5624794067257176089, guid: dc9bcc93ded5ef443a0d2814ac283ed6, type: 3}

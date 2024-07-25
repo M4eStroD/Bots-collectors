@@ -5,14 +5,12 @@ using Random = UnityEngine.Random;
 
 public class UnitSpawner : MonoBehaviour
 {
-    [SerializeField] private Transform _container;
     [SerializeField] private Transform _spawnPosition;
 
     [SerializeField] private Transform _campFire;
     [SerializeField] private Transform _firewoodCollector; 
 
     private IUnitFactory _unitFactory;
-    private int _unitsOnStart = 3;
 
     public event Action<Unit> UnitAdded;
 
@@ -20,11 +18,6 @@ public class UnitSpawner : MonoBehaviour
     private void Construct(IUnitFactory unitFactory)
     {
         _unitFactory = unitFactory;
-    }
-
-    private void Start()
-    {
-        SpawnUnits(_unitsOnStart);
     }
 
     public void SpawnUnits(float countSpawn)

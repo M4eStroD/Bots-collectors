@@ -1,24 +1,18 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 [RequireComponent(typeof(ExtansionBase))]
-public class BaseController : MonoBehaviour
+public class BaseConstructor : MonoBehaviour
 {
 	[SerializeField] private Transform _positionFirstBase;
 	[SerializeField] private List<Base> _bases = new List<Base>();
 
-	[Inject] private ResourceGenerator _resourceGenerator;
-	
-	private readonly Queue<Resource> _freeResource = new Queue<Resource>();
-	private readonly int _countStartUnit = 5;
+	private readonly int _countStartUnit = 3;
 	
 	private ExtansionBase _extansionBase;
 	private FlagBase _flagBase;
 
-	public int CountFreeResource => _freeResource.Count;
-	
 	public event Action<Base> BaseAdded;
 	
  	private void Awake()
@@ -30,24 +24,17 @@ public class BaseController : MonoBehaviour
 	{
 		_extansionBase.FlagPlaced += ChangePriority;
 		_extansionBase.BaseBuilded += AddNewBase;
-		_resourceGenerator.ResourceAdded += AddResource;
 	}
 
 	private void OnDisable()
 	{
 		_extansionBase.FlagPlaced -= ChangePriority;
 		_extansionBase.BaseBuilded -= AddNewBase;
-		_resourceGenerator.ResourceAdded -= AddResource;
 	}
 
 	public void Initialize()
 	{
 		BuildFirstBase();
-	}
-
-	public Resource GetResource()
-	{
-		return _freeResource.Dequeue();
 	}
 
 	private void BuildFirstBase()
@@ -72,10 +59,5 @@ public class BaseController : MonoBehaviour
 	{
 		_bases.Add(newBase);
 		BaseAdded?.Invoke(newBase);
-	}
-	
-	private void AddResource(Resource resource)
-	{
-		_freeResource.Enqueue(resource);
 	}
 }

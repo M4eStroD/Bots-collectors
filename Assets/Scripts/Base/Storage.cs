@@ -1,28 +1,15 @@
 ﻿using System;
 using UnityEngine;
-using Zenject;
 
 public class Storage : MonoBehaviour
 {
-	[Inject] private BaseController _baseController;
-	
 	private int _resources = 0;
 
 	public int Resource => _resources;
 	
 	public event Action<int> ResourceChanged;
 
-	private void OnEnable()
-	{
-		_baseController.BaseAdded += AddNewBase;
-	}
-
-	private void OnDisable()
-	{
-		_baseController.BaseAdded -= AddNewBase;
-	}
-
-	private void AddNewBase(Base build)
+	public void Initialize(Base build)
 	{
 		build.ResourceAdded += AddResource;
 		build.ResourceTaked += GetResource;

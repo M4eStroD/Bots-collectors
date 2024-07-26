@@ -3,19 +3,19 @@ using Zenject;
 
 public class GameplayEntryPoint : MonoBehaviour
 {
-	private BaseController _baseController;
+	private BaseConstructor _baseConstructor;
 	private ResourceGenerator _resourceGenerator;
 
 	[Inject]
-	public void Construct(BaseController baseController, ResourceGenerator resourceGenerator)
+	public void Construct(BaseConstructor baseConstructor, ResourceGenerator resourceGenerator)
 	{
-		_baseController = baseController;
+		_baseConstructor = baseConstructor;
 		_resourceGenerator = resourceGenerator;
 	}
 	
 	private void Start()
 	{
-		_baseController.Initialize();
+		_baseConstructor.Initialize();
 		_resourceGenerator.Initialize();
 	}
 }

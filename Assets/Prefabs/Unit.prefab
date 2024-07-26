@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5313944375701761868}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.33, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22798788681abd042a88d9559f77aefc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabWood: {fileID: 6550944361491187587}
+  _prefabWood: {fileID: 4627826025600836869}
 --- !u!114 &126853945394143734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,7 +305,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5014637029156100333, guid: 3a1b2d1882e5641459491581339d29c4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6550944361491187587}
+      addedObject: {fileID: 4627826025600836869}
   m_SourcePrefab: {fileID: 100100000, guid: 3a1b2d1882e5641459491581339d29c4, type: 3}
 --- !u!4 &4026017419404143578 stripped
 Transform:
@@ -317,7 +317,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5014637029156100333, guid: 3a1b2d1882e5641459491581339d29c4, type: 3}
   m_PrefabInstance: {fileID: 8719823064737556877}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6550944361491187587
+--- !u!114 &4627826025600836869
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -326,6 +326,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4365282368214151520}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd303869bb61f234aaea92bad7319fd9, type: 3}
+  m_Script: {fileID: 11500000, guid: d049851b2aaddb840b36b6cfb43b9eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

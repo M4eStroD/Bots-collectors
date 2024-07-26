@@ -18,9 +18,6 @@ public class PlacerUnit : ObjectPlacer
 
 	protected override void GetClickInfo()
 	{
-		if (CanvasManager.IsCursoreBusy && IsObjectHand == false)
-			return;
-		
 		Ray ray = Camera.ScreenPointToRay(Input.mousePosition);
 
 		if (Physics.Raycast(ray, out RaycastHit hit))

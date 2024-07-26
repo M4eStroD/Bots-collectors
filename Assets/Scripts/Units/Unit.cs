@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(UnitMover))]
 public class Unit : MonoBehaviour
 {
-	[SerializeField] private Wood _prefabWood;
+	[SerializeField] private EmptyWood _prefabWood;
 
 	private Vector3 _placeCamp;
 	private Vector3 _firewoodCollector;
@@ -67,6 +67,7 @@ public class Unit : MonoBehaviour
 			return;
 
 		_resource = resource;
+		_resource.Taked += LoseResource;
 
 		_stateMachine.Enter<RunStateUnit, Vector3>(_resource.transform.position);
 	}
@@ -110,6 +111,7 @@ public class Unit : MonoBehaviour
 
 	private void TakeResourceFloor()
 	{
+		_resource.Taked -= LoseResource;
 		_resource.Take();
 		_countTakeResource = _resource.Cost;
 		_resource = null;
@@ -117,6 +119,15 @@ public class Unit : MonoBehaviour
 		_prefabWood.gameObject.SetActive(true);
 
 		_stateMachine.Enter<CarryStateUnit, Vector3>(_firewoodCollector);
+	}
+
+	private void LoseResource(Resource resource)
+	{
+		_resource.Taked -= LoseResource;
+		_resource = null;
+
+		_stateMachine.Enter<RunStateUnit, Vector3>(_placeCamp);
+		ResourceConveyed?.Invoke(this, 0);
 	}
 
 	private void DropResource()
@@ -133,6 +144,7 @@ public class Unit : MonoBehaviour
 
 		ResourceConveyed?.Invoke(this, _countTakeResource);
 		_countTakeResource = 0;
+		_resource = null;
 	}
 
 	private void BuildBase()

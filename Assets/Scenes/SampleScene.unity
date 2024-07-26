@@ -459,12 +459,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _containerUnit: {fileID: 130720116}
   _containerBase: {fileID: 1903510387}
-  _storage: {fileID: 474775245}
   _resourceGenerator: {fileID: 249354081}
-  _baseController: {fileID: 405763758}
-  _canvasManager: {fileID: 1494827696}
-  _placerFlag: {fileID: 405763760}
-  _placerUnit: {fileID: 1494827697}
+  _baseConstructor: {fileID: 405763758}
+  _canvasSettings: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,17 +836,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5264682707964687173, guid: 46424ea4c7e02904d8678f1ab50c82d9, type: 3}
   m_PrefabInstance: {fileID: 1037773038260729451}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1494827696 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 569532547061105463, guid: 46424ea4c7e02904d8678f1ab50c82d9, type: 3}
-  m_PrefabInstance: {fileID: 1037773038260729451}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1494827694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d0d2d264018ed349a9c1084a904b1ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1494827697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1228,6 +1214,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 5264682707964687173, guid: 46424ea4c7e02904d8678f1ab50c82d9, type: 3}
+      propertyPath: m_Name
+      value: CanvasSettings
+      objectReference: {fileID: 0}
     - target: {fileID: 8238365202708447794, guid: 46424ea4c7e02904d8678f1ab50c82d9, type: 3}
       propertyPath: m_Name
       value: GameplayUI
@@ -1317,7 +1307,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 894567084358060224, guid: 46424ea4c7e02904d8678f1ab50c82d9, type: 3}
+    - {fileID: 1819627567816116246, guid: 46424ea4c7e02904d8678f1ab50c82d9, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5264682707964687173, guid: 46424ea4c7e02904d8678f1ab50c82d9, type: 3}

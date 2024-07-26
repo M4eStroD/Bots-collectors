@@ -9,7 +9,7 @@ public abstract class ObjectPlacer : MonoBehaviour
 	protected bool IsObjectHand;
 	protected Camera Camera;
 	protected Base TargetBase;
-	protected CanvasManager CanvasManager;
+	protected CanvasSettings CanvasSettings;
 	
 	private ObjectMouseFollower _tempObjectHand;
 
@@ -18,9 +18,9 @@ public abstract class ObjectPlacer : MonoBehaviour
 	public event Action ObjectRemoved;
 
 	[Inject]
-	public void Construct(CanvasManager canvasManager)
+	public void Construct(CanvasSettings canvasSettings)
 	{
-		CanvasManager = canvasManager;
+		CanvasSettings = canvasSettings;
 	}
 	
 	private void Awake()

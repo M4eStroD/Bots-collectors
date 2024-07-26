@@ -26,7 +26,7 @@ public class ResourceFactory : IResourceFactory
             tempResource = Object.Instantiate(resourcePrefab);
             _resources.Add(tempResource);
 
-            tempResource.Taked += (() => _objectPoolResources.PutObject(tempResource));
+            tempResource.Taked += ((resource) => _objectPoolResources.PutObject(resource));
         }
         else
         {
